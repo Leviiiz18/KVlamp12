@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Enrichment Workshop - Hero Page</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Inter:wght@400;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
+        .hindi-font {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 20%, #16213e 40%, #0f3460 60%, #533483 80%, #7209b7 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.4) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 140, 0, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(138, 43, 226, 0.3) 0%, transparent 60%),
+                linear-gradient(45deg, transparent 30%, rgba(255, 215, 0, 0.1) 50%, transparent 70%);
+            animation: backgroundShift 8s ease-in-out infinite;
+        }
+        
+        @keyframes backgroundShift {
+            0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+            25% { transform: translateX(-20px) translateY(-10px) rotate(1deg); }
+            50% { transform: translateX(20px) translateY(10px) rotate(-1deg); }
+            75% { transform: translateX(-10px) translateY(20px) rotate(0.5deg); }
+        }
+        
+        .animated-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(255, 215, 0, 0.1), rgba(255, 140, 0, 0.2));
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .shape:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+        
+        .shape:nth-child(4) {
+            width: 300px;
+            height: 300px;
+            top: 30%;
+            right: 30%;
+            animation-delay: 1s;
+            opacity: 0.05;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 215, 0, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 215, 0, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 10s linear infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .text-shadow-strong {
+            text-shadow: 3px 3px 8px rgba(0,0,0,0.8), 0 0 20px rgba(255,215,0,0.3);
+        }
+        
+        .text-shadow-golden {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 15px rgba(255,215,0,0.5);
+        }
+        
+        .logo-glow {
+            filter: drop-shadow(0 0 20px rgba(255,215,0,0.8));
+        }
+        
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        .geometric-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            background-image: 
+                linear-gradient(45deg, #FFD700 25%, transparent 25%), 
+                linear-gradient(-45deg, #FFD700 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #FFD700 75%), 
+                linear-gradient(-45deg, transparent 75%, #FFD700 75%);
+            background-size: 60px 60px;
+            background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+        }
+        
+        .content-container {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 20px;
+        }
+        
+        .main-title-container {
+            position: relative;
+        }
+        
+        .main-title-container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+            border-radius: 2px;
+        }
+        
+        .main-title-container::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+            border-radius: 2px;
+        }
+        
+        .date-badge {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FF8C00);
+            box-shadow: 0 10px 30px rgba(255, 140, 0, 0.4);
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+        
+        .scroll-arrow {
+            width: 30px;
+            height: 30px;
+            border-right: 3px solid #FFD700;
+            border-bottom: 3px solid #FFD700;
+            transform: rotate(45deg);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) rotate(45deg); }
+            40% { transform: translateY(-10px) rotate(45deg); }
+            60% { transform: translateY(-5px) rotate(45deg); }
+        }
+        
+        .side-decoration {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+            height: 200px;
+            opacity: 0.1;
+        }
+        
+        .side-decoration-left {
+            left: 20px;
+            background: linear-gradient(45deg, #FFD700, transparent);
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
+        }
+        
+        .side-decoration-right {
+            right: 20px;
+            background: linear-gradient(-45deg, #FFD700, transparent);
+            clip-path: polygon(100% 0, 0 50%, 100% 100%);
+        }
+    </style>
+</head>
+<body>
+    <button onclick="window.location.href='invication.html'">Go to Next Page</button>
+    <div class="hero-gradient min-h-screen flex items-center justify-center relative">
+        <!-- Animated Background Shapes -->
+        <div class="animated-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        
+        <!-- Moving Grid Overlay -->
+        <div class="grid-overlay"></div>
+        
+        <!-- Geometric Background Pattern -->
+        <div class="geometric-bg"></div>
+        
+        <!-- Floating Particles -->
+        <div class="floating-particles">
+            <div class="particle w-2 h-2" style="top: 20%; left: 10%;"></div>
+            <div class="particle w-3 h-3" style="top: 60%; left: 85%;"></div>
+            <div class="particle w-1 h-1" style="top: 80%; left: 15%;"></div>
+            <div class="particle w-4 h-4" style="top: 30%; left: 90%;"></div>
+            <div class="particle w-2 h-2" style="top: 70%; left: 5%;"></div>
+            <div class="particle w-3 h-3" style="top: 10%; left: 80%;"></div>
+        </div>
+        
+        <!-- Side Decorations -->
+        <div class="side-decoration side-decoration-left"></div>
+        <div class="side-decoration side-decoration-right"></div>
+        
+        <!-- Main Content Container -->
+        <div class="content-container max-w-6xl mx-auto px-6 text-center">
+            <!-- Header with logos -->
+            <div class="flex justify-between items-center mb-12 logo-header">
+                <!-- Left Logo Section -->
+                <div class="flex items-center space-x-4 logo-section-left">
+                    <div class="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center logo-glow transform hover:scale-110 transition-transform">
+                        <div class="w-14 h-14 bg-gradient-to-br from-orange-600 to-red-600 rounded-full flex items-center justify-center">
+                            <div class="text-white text-sm font-bold hindi-font">भारत</div>
+                        </div>
+                    </div>
+                    <div class="hindi-font text-left text-yellow-200 leading-relaxed">
+                        <div class="text-lg font-semibold">शिक्षा मंत्रालय, भारत सरकार</div>
+                        <div class="text-base">केंद्रीय विद्यालय संगठन</div>
+                    </div>
+                </div>
+                
+                <!-- Right Logo Section -->
+                <div class="flex items-center space-x-4 logo-section-right">
+                    <div class="text-right">
+                        <div class="text-6xl font-black text-yellow-300 logo-glow">PM</div>
+                        <div class="text-xl font-bold text-yellow-200 tracking-wider">SHRI</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- School Name Section -->
+            <div class="glass-effect p-8 mb-12 school-name-section">
+                <div class="hindi-font text-xl text-yellow-200 mb-4 text-shadow-golden">
+                    पीएम श्री केंद्रीय विद्यालय क्र.1, पणम्बूर मंगलुरु
+                </div>
+                <div class="text-lg font-bold text-yellow-100 text-shadow-golden tracking-wide">
+                    PM SHRI KENDRIYA VIDYALAYA NO.1, PANAMBUR MANGALORE
+                </div>
+            </div>
+            
+            <!-- Main Title Section -->
+            <div class="main-title-container mb-12">
+                <!-- Hindi Title -->
+                <div class="main-title-hindi mb-6">
+                    <div class="hindi-font text-3xl md:text-4xl font-bold text-yellow-300 text-shadow-strong leading-relaxed">
+                        सीबीएसई प्रश्न पत्र और परिणाम 2025 विश्लेषण सामग्री संवर्धन और क्षमता निर्माण कार्यशाला
+                    </div>
+                </div>
+                
+                <!-- English Title -->
+                <div class="main-title-english">
+                    <div class="text-4xl md:text-6xl lg:text-7xl font-black text-yellow-100 text-shadow-strong leading-tight">
+                        CBSE QUESTION PAPER
+                    </div>
+                    <div class="text-3xl md:text-5xl lg:text-6xl font-bold text-yellow-200 text-shadow-strong mt-2">
+                        AND RESULT 2025 ANALYSIS
+                    </div>
+                    <div class="text-2xl md:text-4xl lg:text-5xl font-bold text-yellow-300 text-shadow-strong mt-2">
+                        CONTENT ENRICHMENT AND CAPACITY BUILDING WORKSHOP
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Date Section -->
+            <div class="date-section" action="index.html" method="get">
+                <div class="inline-block date-badge text-black px-12 py-6 rounded-full font-black text-2xl md:text-3xl shadow-2xl transform hover:scale-105 transition-transform">
+                    04-07-2025 and 05-07-2025
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </div>
+
+    <script>
+        // GSAP Animations
+        gsap.registerPlugin();
+        
+        // Set initial states
+        gsap.set(".logo-section-left", { opacity: 0, x: -100 });
+        gsap.set(".logo-section-right", { opacity: 0, x: 100 });
+        gsap.set(".school-name-section", { opacity: 0, y: -50, scale: 0.9 });
+        gsap.set(".main-title-hindi", { opacity: 0, y: -30, rotationX: -15 });
+        gsap.set(".main-title-english", { opacity: 0, scale: 0.8, rotationY: 15 });
+        gsap.set(".date-section", { opacity: 0, y: 50, scale: 0.8 });
+        gsap.set(".scroll-indicator", { opacity: 0 });
+        gsap.set(".particle", { scale: 0 });
+        
+        // Create main timeline
+        const mainTl = gsap.timeline({ delay: 0.5 });
+        
+        // Hero entrance
+        mainTl.to(".hero-gradient", {
+            duration: 2,
+            opacity: 1,
+            ease: "power2.out"
+        })
+        
+        // Logo animations
+        .to(".logo-section-left", {
+            duration: 1.2,
+            opacity: 1,
+            x: 0,
+            ease: "back.out(1.7)"
+        }, "-=1.5")
+        
+        .to(".logo-section-right", {
+            duration: 1.2,
+            opacity: 1,
+            x: 0,
+            ease: "back.out(1.7)"
+        }, "-=1")
+        
+        // School name with glass effect
+        .to(".school-name-section", {
+            duration: 1,
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            ease: "back.out(1.2)"
+        }, "-=0.8")
+        
+        // Hindi title with 3D effect
+        .to(".main-title-hindi", {
+            duration: 1.2,
+            opacity: 1,
+            y: 0,
+            rotationX: 0,
+            ease: "power3.out"
+        }, "-=0.6")
+        
+        // English title with dramatic entrance
+        .to(".main-title-english", {
+            duration: 1.5,
+            opacity: 1,
+            scale: 1,
+            rotationY: 0,
+            ease: "back.out(1.2)"
+        }, "-=0.8")
+        
+        // Date badge
+        .to(".date-section", {
+            duration: 1,
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            ease: "bounce.out"
+        }, "-=0.4")
+        
+        // Scroll indicator
+        .to(".scroll-indicator", {
+            duration: 0.8,
+            opacity: 1,
+            ease: "power2.out"
+        }, "-=0.2")
+        
+        // Particles animation
+        .to(".particle", {
+            duration: 2,
+            scale: 1,
+            stagger: 0.1,
+            ease: "back.out(1.7)"
+        }, "-=1");
+        
+        // Continuous animations
+        // Floating particles
+        gsap.to(".particle", {
+            duration: 4,
+            y: -20,
+            repeat: -1,
+            yoyo: true,
+            ease: "power2.inOut",
+            stagger: 0.2
+        });
+        
+        // Logo glow pulse
+        gsap.to(".logo-glow", {
+            duration: 3,
+            filter: "drop-shadow(0 0 30px rgba(255,215,0,1))",
+            repeat: -1,
+            yoyo: true,
+            ease: "power2.inOut"
+        });
+        
+        // Main title floating
+        gsap.to(".main-title-english", {
+            duration: 4,
+            y: -10,
+            repeat: -1,
+            yoyo: true,
+            ease: "power2.inOut"
+        });
+        
+        // Date badge glow
+        gsap.to(".date-badge", {
+            duration: 2,
+            boxShadow: "0 10px 50px rgba(255, 140, 0, 0.8)",
+            repeat: -1,
+            yoyo: true,
+            ease: "power2.inOut"
+        });
+        
+        // Glass effect shimmer
+        gsap.to(".school-name-section", {
+            duration: 5,
+            background: "rgba(255, 255, 255, 0.15)",
+            repeat: -1,
+            yoyo: true,
+            ease: "power2.inOut"
+        });
+        
+        // Interactive hover effects
+        document.querySelectorAll('.logo-glow').forEach(logo => {
+            logo.addEventListener('mouseenter', () => {
+                gsap.to(logo, {
+                    duration: 0.3,
+                    scale: 1.2,
+                    rotation: 360,
+                    ease: "back.out(1.7)"
+                });
+            });
+            
+            logo.addEventListener('mouseleave', () => {
+                gsap.to(logo, {
+                    duration: 0.3,
+                    scale: 1,
+                    rotation: 0,
+                    ease: "power2.out"
+                });
+            });
+        });
+        
+        // Date click effect
+        document.querySelector('.date-badge').addEventListener('click', () => {
+            gsap.to('.date-badge', {
+                duration: 0.15,
+                scale: 0.95,
+                yoyo: true,
+                repeat: 1,
+                ease: "power2.inOut"
+            });
+        });
+        
+        // Parallax effect on mouse move
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            
+            gsap.to('.floating-particles', {
+                duration: 2,
+                backgroundPosition: `${x/5}px ${y/5}px`,
+                ease: "power2.out"
+            });
+            
+            gsap.to('.side-decoration-left', {
+                duration: 1,
+                x: -(x/20),
+                y: -(y/20),
+                ease: "power2.out"
+            });
+            
+            gsap.to('.side-decoration-right', {
+                duration: 1,
+                x: x/20,
+                y: -(y/20),
+                ease: "power2.out"
+            });
+        });
+    </script>
+</body>
+</html>

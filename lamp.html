@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KV Traditional Lamp - Workshop Announcement</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(-45deg, #1a237e, #283593, #3949ab, #5c6bc0);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
+            min-height: 100vh;
+            font-family: 'Georgia', serif;
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Mandala background art */
+        .mandala-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0.08;
+            background-image: 
+                radial-gradient(circle at 50% 50%, transparent 40%, rgba(255, 215, 0, 0.1) 41%, rgba(255, 215, 0, 0.1) 42%, transparent 43%),
+                radial-gradient(circle at 50% 50%, transparent 50%, rgba(255, 140, 0, 0.08) 51%, rgba(255, 140, 0, 0.08) 52%, transparent 53%),
+                radial-gradient(circle at 50% 50%, transparent 60%, rgba(255, 165, 0, 0.06) 61%, rgba(255, 165, 0, 0.06) 62%, transparent 63%),
+                conic-gradient(from 0deg, transparent, rgba(255, 215, 0, 0.1), transparent, rgba(255, 140, 0, 0.08), transparent, rgba(255, 165, 0, 0.06), transparent),
+                conic-gradient(from 45deg, transparent, rgba(255, 193, 7, 0.05), transparent, rgba(255, 235, 59, 0.04), transparent);
+            background-size: 400px 400px, 300px 300px, 200px 200px, 600px 600px, 500px 500px;
+            background-position: center, center, center, center, center;
+            animation: mandalaRotate 60s linear infinite;
+        }
+
+        .mandala-overlay {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            opacity: 0.06;
+            background-image: 
+                repeating-conic-gradient(from 0deg at 50% 50%, 
+                    transparent 0deg, 
+                    rgba(255, 215, 0, 0.1) 10deg, 
+                    transparent 20deg, 
+                    rgba(255, 140, 0, 0.08) 30deg, 
+                    transparent 40deg, 
+                    rgba(255, 165, 0, 0.06) 50deg, 
+                    transparent 60deg
+                );
+            background-size: 800px 800px;
+            background-position: center;
+            animation: mandalaRotate 45s linear infinite reverse;
+        }
+
+        /* Enhanced geometric particles */
+        .geometric-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .geo-particle {
+            position: absolute;
+            animation: geometricFloat 20s infinite linear;
+            opacity: 0.6;
+        }
+
+        .geo-particle.triangle {
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 8px solid rgba(255, 215, 0, 0.4);
+            animation-duration: 25s;
+        }
+
+        .geo-particle.diamond {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 140, 0, 0.4);
+            transform: rotate(45deg);
+            animation-duration: 18s;
+        }
+
+        .geo-particle.hexagon {
+            width: 10px;
+            height: 6px;
+            background: rgba(255, 165, 0, 0.4);
+            position: relative;
+            animation-duration: 22s;
+        }
+
+        .geo-particle.hexagon:before,
+        .geo-particle.hexagon:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+        }
+
+        .geo-particle.hexagon:before {
+            bottom: 100%;
+            border-bottom: 3px solid rgba(255, 165, 0, 0.4);
+        }
+
+        .geo-particle.hexagon:after {
+            top: 100%;
+            border-top: 3px solid rgba(255, 165, 0, 0.4);
+        }
+
+        .geo-particle.circle {
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 0, 0.4);
+            border-radius: 50%;
+            animation-duration: 16s;
+        }
+
+        /* Floating mandalas */
+        .floating-mandalas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .mini-mandala {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            animation: mandalaFloat 30s infinite linear;
+            opacity: 0.3;
+        }
+
+        .mini-mandala::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 1px solid rgba(255, 140, 0, 0.4);
+            border-radius: 50%;
+        }
+
+        .mini-mandala::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 165, 0, 0.2);
+            border-radius: 50%;
+        }
+
+        /* Workshop Text - Fixed positioning */
+        .workshop-text {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            z-index: 20;
+            max-width: 90vw;
+        }
+
+        .workshop-title {
+            font-size: clamp(24px, 4vw, 48px);
+            font-weight: bold;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(255, 215, 0, 0.5);
+            margin-bottom: 15px;
+            line-height: 1.2;
+            letter-spacing: 2px;
+            animation: textGlow 4s ease-in-out infinite;
+        }
+
+        .workshop-subtitle {
+            font-size: clamp(16px, 2.5vw, 28px);
+            color: #ffffff;
+            text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+            font-weight: 300;
+            line-height: 1.4;
+            margin-top: 10px;
+            opacity: 0.95;
+        }
+
+        /* KV Logo in background - enhanced */
+        .kv-logo-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 700px;
+            opacity: 0.06;
+            z-index: 5;
+            animation: logoGlow 8s ease-in-out infinite;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+        }
+
+        .kv-logo {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 140px;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 6px 6px 12px rgba(0,0,0,0.5);
+            border-radius: 50%;
+            border: 8px solid rgba(255, 215, 0, 0.2);
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent 70%);
+        }
+
+        /* Main lamp container - centered properly */
+        .lamp-section {
+            position: relative;
+            z-index: 10;
+            animation: lampFloat 8s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding-top: 100px;
+            padding-bottom: 40px;
+        }
+
+        /* Clean lamp styling - no container background */
+        .lamp-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 200px;
+            height: 500px;
+            animation: lampGlow 6s ease-in-out infinite;
+        }
+
+        .lamp-container:hover {
+            transform: scale(1.08);
+        }
+
+        /* Base plate - enhanced */
+        .lamp-base {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 20px;
+            background: linear-gradient(45deg, #b8860b, #daa520, #ffd700, #ffeb3b);
+            border-radius: 50%;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Main stem - enhanced gradient */
+        .lamp-stem {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 400px;
+            background: linear-gradient(to bottom, 
+                #b8860b, #daa520, #ffd700, #ffeb3b, 
+                #ffd700, #daa520, #b8860b, #8b7355);
+            border-radius: 10px;
+            box-shadow: inset 0 0 12px rgba(0,0,0,0.3), 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+
+        /* Enhanced decorative bulges */
+        .stem-bulge {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #b8860b, #daa520, #ffd700, #ffeb3b);
+            border-radius: 50%;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.4), 0 0 12px rgba(255, 215, 0, 0.3);
+        }
+
+        .bulge-1 { bottom: 350px; width: 35px; height: 25px; }
+        .bulge-2 { bottom: 300px; width: 40px; height: 30px; }
+        .bulge-3 { bottom: 250px; width: 45px; height: 35px; }
+        .bulge-4 { bottom: 200px; width: 50px; height: 40px; }
+        .bulge-5 { bottom: 150px; width: 55px; height: 45px; }
+        .bulge-6 { bottom: 100px; width: 60px; height: 50px; }
+        .bulge-7 { bottom: 50px; width: 65px; height: 55px; }
+
+        /* Enhanced oil container */
+        .oil-dish {
+            position: absolute;
+            bottom: 420px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 30px;
+            background: linear-gradient(45deg, #b8860b, #daa520, #ffd700, #ffeb3b);
+            border-radius: 60px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4), inset 0 -10px 20px rgba(0,0,0,0.3);
+        }
+
+        .dish-rim {
+            position: absolute;
+            top: -3px;
+            left: -5px;
+            right: -5px;
+            height: 6px;
+            background: linear-gradient(45deg, #ffd700, #ffeb3b, #fff);
+            border-radius: 50%;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.3);
+        }
+
+        .oil-spout {
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 12px;
+            background: linear-gradient(45deg, #b8860b, #daa520, #ffd700);
+            border-radius: 15px 0 0 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+        }
+
+        .wick {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 15px;
+            background: #2c1810;
+            border-radius: 3px;
+            top: -10px;
+        }
+
+        /* Enhanced flame */
+        .flame {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -50px;
+            width: 25px;
+            height: 35px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .flame.lit {
+            opacity: 1;
+            animation: flicker 2.5s infinite alternate;
+        }
+
+        .flame-inner {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 50% 100%, 
+                #ff4500, #ff6347, #ffa500, #ffd700, #fff);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 30px rgba(255, 140, 0, 0.9), 0 0 50px rgba(255, 69, 0, 0.5);
+        }
+
+        /* Enhanced global glow effect */
+        .lamp-glow-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, 
+                rgba(255, 215, 0, 0.3), 
+                rgba(255, 140, 0, 0.2) 40%, 
+                transparent 70%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .lamp-glow-effect.active {
+            opacity: 1;
+            animation: pulseGlow 4s infinite;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 15;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #ffd700;
+            border-radius: 50%;
+            opacity: 0;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+        }
+
+        .audio-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .audio-toggle:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+
+        /* Enhanced Animations */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes mandalaRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes geometricFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes mandalaFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% {
+                transform: translateY(-100px) rotate(-360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes textGlow {
+            0%, 100% { 
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 20px rgba(255, 215, 0, 0.5);
+            }
+            50% { 
+                text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 30px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        @keyframes logoGlow {
+            0%, 100% { opacity: 0.06; }
+            50% { opacity: 0.12; }
+        }
+
+        @keyframes lampFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        @keyframes lampGlow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.4)); }
+            50% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.7)); }
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) rotate(-3deg) scale(1); }
+            25% { transform: translateX(-50%) rotate(2deg) scale(1.1); }
+            50% { transform: translateX(-50%) rotate(3deg) scale(0.9); }
+            75% { transform: translateX(-50%) rotate(-2deg) scale(1.15); }
+            100% { transform: translateX(-50%) rotate(2deg) scale(0.95); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        @keyframes sparkleFloat {
+            0% { opacity: 0; transform: translateY(0) scale(0) rotate(0deg); }
+            50% { opacity: 1; transform: translateY(-150px) scale(1) rotate(180deg); }
+            100% { opacity: 0; transform: translateY(-300px) scale(0) rotate(360deg); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .lamp-container {
+                width: 150px;
+                height: 400px;
+            }
+            
+            .kv-logo-bg {
+                width: 500px;
+                height: 500px;
+            }
+            
+            .kv-logo {
+                font-size: 100px;
+            }
+
+            .workshop-text {
+                top: 15px;
+                margin: 0 10px;
+            }
+
+            .lamp-section {
+                padding-top: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .workshop-text {
+                top: 10px;
+            }
+            
+            .lamp-section {
+                padding-top: 60px;
+            }
+            
+            .lamp-container {
+                width: 120px;
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button onclick="window.location.href='index.html'">Go to Next Page</button>
+    <!-- Mandala backgrounds -->
+    <div class="mandala-bg"></div>
+    <div class="mandala-overlay"></div>
+    
+    <!-- Enhanced geometric particles -->
+    <div class="geometric-particles" id="geometricParticles"></div>
+    
+    <!-- Floating mandalas -->
+    <div class="floating-mandalas" id="floatingMandalas"></div>
+    
+    <!-- Workshop Text -->
+    <div class="workshop-text">
+        <div class="workshop-title">
+            2 DAY WORKSHOP FOR TGT ENGLISH
+        </div>
+    </div>
+    
+    <!-- KV Logo in background -->
+    <div class="kv-logo-bg">
+        <div class="kv-logo">KV</div>
+    </div>
+    
+    <!-- Main lamp -->
+    <div class="lamp-section">
+        <div class="lamp-glow-effect" id="lampGlow"></div>
+        
+        <div class="lamp-container" id="lampContainer">
+            <!-- Base -->
+            <div class="lamp-base"></div>
+            
+            <!-- Main stem with decorative bulges -->
+            <div class="lamp-stem"></div>
+            <div class="stem-bulge bulge-1"></div>
+            <div class="stem-bulge bulge-2"></div>
+            <div class="stem-bulge bulge-3"></div>
+            <div class="stem-bulge bulge-4"></div>
+            <div class="stem-bulge bulge-5"></div>
+            <div class="stem-bulge bulge-6"></div>
+            <div class="stem-bulge bulge-7"></div>
+            
+            <!-- Oil container -->
+            <div class="oil-dish">
+                <div class="dish-rim"></div>
+                <div class="oil-spout"></div>
+                <div class="wick"></div>
+                <div class="flame">
+                    <div class="flame-inner"></div>
+                </div>
+            </div>
+            
+            <div class="particles" id="particles"></div>
+        </div>
+    </div>
+        
+    <button class="audio-toggle" id="audioToggle" onclick="toggleAudio()">🔊 Sound: ON</button>
+    <audio id="lampSound" loop preload="auto"></audio>
+
+    <script>
+    let isLit = false;
+    let audioEnabled = true;
+    let audioElement;
+
+    function initAudio() {
+        if (!audioElement) {
+            audioElement = document.getElementById('lampSound');
+        }
+    }
+
+    function playLightingSound() {
+        if (!audioEnabled) return;
+        if (audioElement) {
+            audioElement.currentTime = 0;
+            audioElement.play();
+        }
+    }
+
+    function stopLightingSound() {
+        if (audioElement) {
+            audioElement.pause();
+            audioElement.currentTime = 0;
+        }
+    }
+
+    function createSparkles() {
+        const particles = document.getElementById('particles');
+
+        for (let i = 0; i < 60; i++) {
+            setTimeout(() => {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 160 + 20 + 'px';
+                particle.style.top = Math.random() * 300 + 200 + 'px';
+                particle.style.animation = `sparkleFloat ${2 + Math.random() * 3}s ease-out forwards`;
+
+                const colors = ['#ffd700', '#ff6b35', '#ff4500', '#ffa500', '#ffeb3b', '#fff'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+                particles.appendChild(particle);
+
+                setTimeout(() => {
+                    particle.remove();
+                }, 5000);
+            }, i * 60);
+        }
+    }
+
+    function createGeometricParticles() {
+        const container = document.getElementById('geometricParticles');
+        const shapes = ['triangle', 'diamond', 'hexagon', 'circle'];
+
+        for (let i = 0; i < 40; i++) {
+            const particle = document.createElement('div');
+            const shape = shapes[Math.floor(Math.random() * shapes.length)];
+            particle.className = `geo-particle ${shape}`;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            container.appendChild(particle);
+        }
+    }
+
+    function createFloatingMandalas() {
+        const container = document.getElementById('floatingMandalas');
+
+        for (let i = 0; i < 15; i++) {
+            const mandala = document.createElement('div');
+            mandala.className = 'mini-mandala';
+            mandala.style.left = Math.random() * 100 + '%';
+            mandala.style.animationDelay = Math.random() * 30 + 's';
+            mandala.style.animationDuration = (25 + Math.random() * 15) + 's';
+            container.appendChild(mandala);
+        }
+    }
+
+    function lightLamp() {
+        if (isLit) return;
+
+        initAudio();
+        isLit = true;
+
+        const flame = document.querySelector('.flame');
+        const glow = document.getElementById('lampGlow');
+
+        flame.classList.add('lit');
+        glow.classList.add('active');
+
+        playLightingSound();
+
+        setTimeout(() => {
+            createSparkles();
+        }, 800);
+
+        setTimeout(() => {
+            document.body.style.background = 'linear-gradient(-45deg, #4a148c, #6a1b9a, #7b1fa2, #8e24aa, #9c27b0)';
+            document.body.style.backgroundSize = '500% 500%';
+        }, 1500);
+    }
+
+    function toggleAudio() {
+        audioEnabled = !audioEnabled;
+        const button = document.getElementById('audioToggle');
+        button.textContent = audioEnabled ? '🔊 Sound: ON' : '🔇 Sound: OFF';
+
+        if (!audioEnabled) {
+            stopLightingSound();
+        } else if (isLit) {
+            playLightingSound();
+        }
+    }
+
+    createGeometricParticles();
+    createFloatingMandalas();
+
+    document.getElementById('lampContainer').addEventListener('click', lightLamp);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.code === 'Space' || e.code === 'Enter') {
+            e.preventDefault();
+            lightLamp();
+        }
+    });
+
+    setTimeout(() => {
+        if (!isLit) {
+            lightLamp();
+        }
+    }, 3000);
+</script>
+
+</body>
+</html>

@@ -80,7 +80,7 @@
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-indigo-950 via-purple-900 to-amber-900 overflow-x-hidden">
-    <button onclick="window.location.href='lamp.html'">Go to Next Page</button>
+    <button onclick="window.location.href='index.html'">Go to Next Page</button>
     <!-- Floating Particles -->
     <div class="fixed inset-0 pointer-events-none z-0">
         <div class="particle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
@@ -91,115 +91,112 @@
         <div class="particle" style="top: 70%; left: 40%; animation-delay: 2.5s;"></div>
     </div>
 
-    <div class="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-8 lotus-bg">
-      
-
-        <!-- Title -->
-        <div class="title-section mb-12 text-center" id="titleSection">
-            <h1 class="text-4xl md:text-6xl cinzel font-bold gradient-text mb-4 opacity-0">
-                Saraswati Vandana
-            </h1>
-            <div class="w-32 h-1 sacred-border mx-auto rounded-full opacity-0" id="titleUnderline"></div>
-            <p class="text-amber-200 text-lg mt-6 cinzel font-medium opacity-0" id="subtitle">
-                Sacred Invocation to the Goddess of Knowledge
-            </p>
-        </div>
-
-        <!-- Sanskrit Verses -->
-        <div class="verse-section max-w-4xl w-full space-y-8" id="verseSection">
+    <div class="relative z-10 min-h-screen px-4 py-8 lotus-bg">
+        <!-- Main Container with proper spacing -->
+        <div class="max-w-6xl mx-auto space-y-16">
             
-            <!-- Verse 1 -->
-            <div class="verse-container rounded-2xl p-8 transform opacity-0 translate-y-8" id="verse1">
-                <div class="text-center">
-                    <div class="devanagari text-2xl md:text-3xl text-amber-100 mb-4 leading-relaxed">
-                        या कुन्देन्दुतुषारहारधवला या शुभ्रवस्त्रावृता
-                    </div>
-                    <div class="cinzel text-lg md:text-xl text-amber-200 italic">
-                        Ya Kundendu Tusharahara Dhavala Ya Shubhra Vastraavrita
-                    </div>
-                    <div class="text-amber-300 text-sm md:text-base mt-3 font-light">
-                        She who is as pure as jasmine, moon, snow and pearls, adorned in white garments
-                    </div>
-                </div>
+            <!-- Title Section -->
+            <div class="title-section text-center pt-8" id="titleSection">
+                <h1 class="text-4xl md:text-6xl cinzel font-bold gradient-text mb-6 opacity-0">
+                    Saraswati Vandana
+                </h1>
+                <div class="w-32 h-1 sacred-border mx-auto rounded-full opacity-0 mb-6" id="titleUnderline"></div>
+                <p class="text-amber-200 text-lg cinzel font-medium opacity-0" id="subtitle">
+                    Sacred Invocation to the Goddess of Knowledge
+                </p>
             </div>
 
-            <!-- Verse 2 -->
-            <div class="verse-container rounded-2xl p-8 transform opacity-0 translate-y-8" id="verse2">
-                <div class="text-center">
-                    <div class="devanagari text-2xl md:text-3xl text-amber-100 mb-4 leading-relaxed">
-                        या वीणावरदण्डमण्डितकरा या श्वेतपद्मासना
-                    </div>
-                    <div class="cinzel text-lg md:text-xl text-amber-200 italic">
-                        Ya Veena Varadanda Manditakara Ya Shveta Padmasana
-                    </div>
-                    <div class="text-amber-300 text-sm md:text-base mt-3 font-light">
-                        She whose hands are adorned with the veena, seated on a white lotus
-                    </div>
-                </div>
-            </div>
-
-          
-
-        <!-- Closing Mantra -->
-        <div class="closing-section mt-12 text-center" id="closingSection">
-            <div class="text-3xl gradient-text cinzel font-bold opacity-0 floating">
-                ॥ सरस्वत्यै नमः ॥
-            </div>
-            <div class="text-amber-200 mt-2 cinzel opacity-0">
-                Saraswatyai Namah
-            </div>
-        </div>
-
-        <!-- Audio Controls -->
-        <div class="audio-controls mt-8 text-center" id="audioControls">
-            <div class="bg-black bg-opacity-30 backdrop-blur-md rounded-2xl p-6 max-w-md mx-auto border border-amber-500 border-opacity-30">
-                <div class="mb-4">
-                    <button id="playPauseBtn" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-8 py-3 rounded-full cinzel font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
-                        🎵 Play Invocation
-                    </button>
-                </div>
+            <!-- Sanskrit Verses Section -->
+            <div class="verse-section max-w-4xl mx-auto space-y-12" id="verseSection">
                 
-                <div class="mb-3">
-                    <input type="file" id="audioInput" accept="audio/*" class="hidden">
-                    <button id="uploadBtn" class="text-amber-300 hover:text-amber-200 cinzel text-sm underline transition-colors duration-300">
-                        Upload Your Audio File
-                    </button>
-                </div>
-                
-                <div class="flex items-center justify-between text-amber-300 text-sm">
-                    <span id="currentTime">0:00</span>
-                    <div class="flex-1 mx-4">
-                        <div class="bg-amber-900 bg-opacity-50 rounded-full h-2 relative">
-                            <div id="progressBar" class="bg-gradient-to-r from-amber-400 to-amber-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                <!-- Verse 1 -->
+                <div class="verse-container rounded-2xl p-8 transform opacity-0 translate-y-8" id="verse1">
+                    <div class="text-center">
+                        <div class="devanagari text-2xl md:text-3xl text-amber-100 mb-4 leading-relaxed">
+                            या कुन्देन्दुतुषारहारधवला या शुभ्रवस्त्रावृता
+                        </div>
+                        <div class="cinzel text-lg md:text-xl text-amber-200 italic mb-3">
+                            Ya Kundendu Tusharahara Dhavala Ya Shubhra Vastraavrita
+                        </div>
+                        <div class="text-amber-300 text-sm md:text-base font-light">
+                            She who is as pure as jasmine, moon, snow and pearls, adorned in white garments
                         </div>
                     </div>
-                    <span id="totalTime">0:00</span>
                 </div>
-                
-                <div class="mt-3 text-amber-400 text-xs cinzel">
-                    <span id="statusText">Ready to play</span>
+
+                <!-- Verse 2 -->
+                <div class="verse-container rounded-2xl p-8 transform opacity-0 translate-y-8" id="verse2">
+                    <div class="text-center">
+                        <div class="devanagari text-2xl md:text-3xl text-amber-100 mb-4 leading-relaxed">
+                            या वीणावरदण्डमण्डितकरा या श्वेतपद्मासना
+                        </div>
+                        <div class="cinzel text-lg md:text-xl text-amber-200 italic mb-3">
+                            Ya Veena Varadanda Manditakara Ya Shveta Padmasana
+                        </div>
+                        <div class="text-amber-300 text-sm md:text-base font-light">
+                            She whose hands are adorned with the veena, seated on a white lotus
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Closing Mantra Section -->
+            <div class="closing-section text-center" id="closingSection">
+                <div class="text-3xl gradient-text cinzel font-bold opacity-0 floating mb-3">
+                    ॥ सरस्वत्यै नमः ॥
+                </div>
+                <div class="text-amber-200 cinzel opacity-0">
+                    Saraswatyai Namah
                 </div>
             </div>
-        </div>
 
-        <!-- Blessing Text -->
-        <div class="blessing-text mt-8 text-center opacity-0" id="blessing">
-            <p class="text-amber-300 cinzel text-lg max-w-2xl mx-auto leading-relaxed">
-                "May the divine grace of Goddess Saraswati illuminate our minds with wisdom, 
-                our hearts with devotion, and our lives with knowledge and understanding."
-            </p>
+            <!-- Audio Controls Section -->
+            <div class="audio-controls text-center" id="audioControls">
+                <div class="bg-black bg-opacity-30 backdrop-blur-md rounded-2xl p-6 max-w-md mx-auto border border-amber-500 border-opacity-30">
+                    <div class="mb-4">
+                        <button id="playPauseBtn" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white px-8 py-3 rounded-full cinzel font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+                            🎵 Play Invocation
+                        </button>
+                    </div>
+                    
+                    <div class="flex items-center justify-between text-amber-300 text-sm mb-3">
+                        <span id="currentTime">0:00</span>
+                        <div class="flex-1 mx-4">
+                            <div class="bg-amber-900 bg-opacity-50 rounded-full h-2 relative">
+                                <div id="progressBar" class="bg-gradient-to-r from-amber-400 to-amber-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <span id="totalTime">0:00</span>
+                    </div>
+                    
+                    <div class="text-amber-400 text-xs cinzel">
+                        <span id="statusText">Ready to play</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blessing Text Section -->
+            <div class="blessing-text text-center opacity-0 pb-8" id="blessing">
+                <p class="text-amber-300 cinzel text-lg max-w-2xl mx-auto leading-relaxed">
+                    "May the divine grace of Goddess Saraswati illuminate our minds with wisdom, 
+                    our hearts with devotion, and our lives with knowledge and understanding."
+                </p>
+            </div>
+            
         </div>
     </div>
 
-    <!-- Hidden Audio Element -->
-    <audio id="audioPlayer" preload="metadata"></audio>
+    <!-- Audio Element with source -->
+    <audio id="audioPlayer" preload="metadata">
+        <source src="lamp.mp3" type="audio/mpeg">
+        
+    </audio>
 
     <script>
         // Audio and animation variables
         let audioPlayer = document.getElementById('audioPlayer');
         let playPauseBtn = document.getElementById('playPauseBtn');
-        let audioInput = document.getElementById('audioInput');
-        let uploadBtn = document.getElementById('uploadBtn');
         let progressBar = document.getElementById('progressBar');
         let currentTimeSpan = document.getElementById('currentTime');
         let totalTimeSpan = document.getElementById('totalTime');
@@ -209,36 +206,27 @@
         
         // Verse timing (adjust these based on your audio - in seconds)
         const verseTiming = {
-            omSymbol: 2,
-            verse1: 15,    // When first verse starts
-            verse2: 35,    // When second verse starts  
-            verse3: 55,    // When third verse starts
-            verse4: 75,    // When fourth verse starts
-            closing: 95    // When closing mantra starts
+            verse1: 5,     // When first verse starts
+            verse2: 25,    // When second verse starts  
+            closing: 45    // When closing mantra starts
         };
 
         // GSAP Timeline for sequential animations
         const tl = gsap.timeline({ paused: true });
 
         // Initial setup - hide all elements
-        gsap.set("#omSymbol div, #titleSection h1, #titleUnderline, #subtitle, .verse-container, #closingSection div, #blessing, #audioControls", {
+        gsap.set("#titleSection h1, #titleUnderline, #subtitle, .verse-container, #closingSection div, #blessing, #audioControls", {
             opacity: 0,
             y: 50
         });
 
         // Build the timeline
-        tl.to("#omSymbol div", {
-            duration: 1.5,
-            opacity: 1,
-            y: 0,
-            ease: "power2.out"
-        })
-        .to("#titleSection h1", {
+        tl.to("#titleSection h1", {
             duration: 1.2,
             opacity: 1,
             y: 0,
             ease: "power2.out"
-        }, "-=0.8")
+        })
         .to("#titleUnderline", {
             duration: 0.8,
             opacity: 1,
@@ -262,28 +250,22 @@
         // Start the initial animation
         tl.play();
 
-        // Audio event listeners
-        uploadBtn.addEventListener('click', () => {
-            audioInput.click();
+        // Check if audio file is loaded
+        audioPlayer.addEventListener('loadedmetadata', function() {
+            totalTimeSpan.textContent = formatTime(audioPlayer.duration);
+            statusText.textContent = 'Audio loaded - Ready to play';
         });
 
-        audioInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const url = URL.createObjectURL(file);
-                audioPlayer.src = url;
-                statusText.textContent = `Loaded: ${file.name}`;
-                playPauseBtn.innerHTML = '▶️ Play Invocation';
-            }
+        audioPlayer.addEventListener('error', function() {
+            statusText.textContent = 'Audio file not found. Please check filename.';
+            playPauseBtn.innerHTML = '❌ Audio Not Found';
+            playPauseBtn.disabled = true;
         });
 
         playPauseBtn.addEventListener('click', togglePlayPause);
 
         function togglePlayPause() {
-            if (!audioPlayer.src) {
-                statusText.textContent = 'Please upload an audio file first';
-                return;
-            }
+            if (playPauseBtn.disabled) return;
 
             if (isPlaying) {
                 audioPlayer.pause();
@@ -291,11 +273,15 @@
                 playPauseBtn.classList.remove('audio-wave');
                 statusText.textContent = 'Paused';
             } else {
-                audioPlayer.play();
-                playPauseBtn.innerHTML = '⏸️ Pause';
-                playPauseBtn.classList.add('audio-wave');
-                statusText.textContent = 'Playing...';
-                startSyncedAnimation();
+                audioPlayer.play().then(() => {
+                    playPauseBtn.innerHTML = '⏸️ Pause';
+                    playPauseBtn.classList.add('audio-wave');
+                    statusText.textContent = 'Playing...';
+                    startSyncedAnimation();
+                }).catch(error => {
+                    console.error('Error playing audio:', error);
+                    statusText.textContent = 'Error playing audio';
+                });
             }
             isPlaying = !isPlaying;
         }
@@ -304,8 +290,6 @@
             // Show verses based on audio timing
             setTimeout(() => showVerse('verse1'), verseTiming.verse1 * 1000);
             setTimeout(() => showVerse('verse2'), verseTiming.verse2 * 1000);
-            setTimeout(() => showVerse('verse3'), verseTiming.verse3 * 1000);
-            setTimeout(() => showVerse('verse4'), verseTiming.verse4 * 1000);
             setTimeout(() => showClosing(), verseTiming.closing * 1000);
         }
 
@@ -354,10 +338,6 @@
                 progressBar.style.width = progress + '%';
                 currentTimeSpan.textContent = formatTime(audioPlayer.currentTime);
             }
-        });
-
-        audioPlayer.addEventListener('loadedmetadata', function() {
-            totalTimeSpan.textContent = formatTime(audioPlayer.duration);
         });
 
         audioPlayer.addEventListener('ended', function() {

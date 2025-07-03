@@ -7,7 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Inter:wght@400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Kannada:wght@400;600;700&family=Inter:wght@400;600;700;800&display=swap');
         
         * {
             margin: 0;
@@ -22,6 +22,10 @@
         
         .hindi-font {
             font-family: 'Noto Sans Devanagari', sans-serif;
+        }
+        
+        .kannada-font {
+            font-family: 'Noto Sans Kannada', sans-serif;
         }
         
         .hero-gradient {
@@ -259,7 +263,7 @@
     </style>
 </head>
 <body>
-    <button onclick="window.location.href='inviocation.html'">Go to Next Page</button>
+    <button onclick="window.location.href='invication.html'">Go to Next Page</button>
     <div class="hero-gradient min-h-screen flex items-center justify-center relative">
         <!-- Animated Background Shapes -->
         <div class="animated-shapes">
@@ -317,9 +321,15 @@
             
             <!-- School Name Section -->
             <div class="glass-effect p-8 mb-12 school-name-section">
+                <!-- Kannada School Name -->
+                <div class="kannada-font text-2xl text-yellow-300 mb-4 text-shadow-golden font-semibold">
+                    ಪಿಎಂ ಶ್ರೀ ಕೇಂದ್ರೀಯ ವಿದ್ಯಾಲಯ ಸಂಖ್ಯೆ.1, ಪಣಂಬೂರ್ ಮಂಗಳೂರು
+                </div>
+                <!-- Hindi School Name -->
                 <div class="hindi-font text-xl text-yellow-200 mb-4 text-shadow-golden">
                     पीएम श्री केंद्रीय विद्यालय क्र.1, पणम्बूर मंगलुरु
                 </div>
+                <!-- English School Name -->
                 <div class="text-lg font-bold text-yellow-100 text-shadow-golden tracking-wide">
                     PM SHRI KENDRIYA VIDYALAYA NO.1, PANAMBUR MANGALORE
                 </div>

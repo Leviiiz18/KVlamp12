@@ -634,7 +634,13 @@
     </div>
         
     <button class="audio-toggle" id="audioToggle" onclick="toggleAudio()">🔊 Sound: ON</button>
-    <audio id="lampSound" loop preload="auto"></audio>
+    
+    <!-- Replace this src with your song filename -->
+    <audio id="lampSound" loop preload="auto">
+        <source src="l12.mp3" type="audio/mpeg">
+       
+        Your browser does not support the audio element.
+    </audio>
 
     <script>
     let isLit = false;
@@ -644,14 +650,20 @@
     function initAudio() {
         if (!audioElement) {
             audioElement = document.getElementById('lampSound');
+            // Set volume to a comfortable level
+            audioElement.volume = 0.5;
         }
     }
 
     function playLightingSound() {
         if (!audioEnabled) return;
+        initAudio();
         if (audioElement) {
             audioElement.currentTime = 0;
-            audioElement.play();
+            // Handle autoplay restrictions
+            audioElement.play().catch(e => {
+                console.log("Auto-play was prevented:", e);
+            });
         }
     }
 
@@ -716,7 +728,6 @@
     function lightLamp() {
         if (isLit) return;
 
-        initAudio();
         isLit = true;
 
         const flame = document.querySelector('.flame');
@@ -749,9 +760,11 @@
         }
     }
 
+    // Initialize everything
     createGeometricParticles();
     createFloatingMandalas();
 
+    // Event listeners
     document.getElementById('lampContainer').addEventListener('click', lightLamp);
 
     document.addEventListener('keydown', (e) => {
@@ -761,11 +774,17 @@
         }
     });
 
+    // Auto-light after 3 seconds
     setTimeout(() => {
         if (!isLit) {
             lightLamp();
         }
     }, 3000);
+
+    // Handle audio loading errors
+    document.getElementById('lampSound').addEventListener('error', function(e) {
+        console.log('Audio loading error:', e);
+    });
 </script>
 
 </body>
